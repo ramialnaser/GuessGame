@@ -1,0 +1,35 @@
+﻿
+@{
+	ViewData["Title"] = "TheGame";
+}
+
+@Html.Raw(PrintModel.Title("The Game", 3))
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+@model int
+<p id="gameId" style="display:none;">@Model</p>
+
+<style>
+	#draw-canvas {
+		background-color: #ddd;
+	}
+</style>
+
+<div>
+	<input type="color" id="color" value="#000000" />
+	<input type="button" id="clear" value="Clear" />
+	<input type="button" id="save" value="Save" />
+	<input type="text" id="clientGuess" placeholder="Make a guess..." />
+	<input type="button" id="sendvalue" value="Send" />
+
+
+</div>
+<div>
+	<canvas id="draw-canvas" height="500" width="800"></canvas>
+</div>
+<script src="~/lib/signalr/signalr.js"></script>
+<script src="~/js/draw.js"></script>
+
+
+

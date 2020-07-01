@@ -1,0 +1,22 @@
+{
+  "name": "guessgame_mvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EliasHaloun0104/GuessGame_MVC.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EliasHaloun0104/GuessGame_MVC/issues"
+  },
+  "homepage": "https://github.com/EliasHaloun0104/GuessGame_MVC#readme",
+  "dependencies": {
+    "@aspnet/signalr": "^1.1.4"
+  }
+}

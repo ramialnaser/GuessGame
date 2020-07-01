@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewData["Title"] = "MyPage";
+}
+
+@Html.Raw(PrintModel.Title("MyPage", 1))
+@Html.Raw(PrintModel.SubTitle("Welcome!", 1))
+
+
+@model Data
+
+@{
+    string isEnabled = Model.Elem1 == 1 ? "disabled" : "";
+
+    <button class="btn btn-info my-2" onclick="CreateGame()" @isEnabled>Create new Game</button>
+
+
+}
+
+@Html.Raw(PrintModel.SubTitle("Active Game", 3))
+@{
+
+
+        var games = GameModel.getGame();
+        <table>
+
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in games)
+                    {
+
+                        <tr>
+
+                            @if (@item.Active)
+                            {
+                                <td width="60"><button class="btn btn-info my-2" onclick="ActiveGame()">View Game @item.Gameid</button></td>
+
+                            }
+
+                        </tr>
+                    }
+                </div>
+            </div>
+        </table>
+    
+}
+@Html.Raw(PrintModel.SubTitle("Previous Game", 3))
+@{
+    <table class="table">
+        >
+        <thead>
+            <tr>
+
+                <th scope="col">Painting Id</th>
+                <th scope="col">Painting description</th>
+                <th scope="col">Final Painting</th>
+                <th scope="col">Correct Guesses</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in games)
+            {
+
+            <tr>
+
+                @if (@item.Active == false)
+                {
+                    <td>@item.Gameid</td>
+                    <td>@item.DrawText</td>
+                    <td><img src="@item.Img" width="240" height="150" alt="Not Set" /></td>
+                    <td>@item.CorrectGuess</td>
+                }
+            </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@Html.Raw(PrintModel.SubTitle("Some Statistic (Future Work)", 3))
+
+@Html.Raw(PrintModel.SubTitle("Your rating is 4.5/5.0  (Future Work)", 3))
+
+@Html.Raw(PrintModel.SubTitle("Your Info", 3))
+
+<div class="container w-50 p-3 text-center">
+    <form id="signUp" method="post" class="border border-light p-5">
+        <input type="text" id="userid" name="email" placeholder="Enter you email address" class="form-control mb-4" readonly>
+        <input type="email" id="email" name="email" placeholder="Enter you email address" class="form-control mb-4">
+        <input type="text" id="nickName" name="nickName" placeholder="Enter you nick name" class="form-control mb-4">
+        <input type="password" id="password" name="password" placeholder="Enter you password" class="form-control mb-4">
+        <input type="text" id="avatar" name="avatar" class="form-control mb-4">
+        <input type="submit" value="Update!" class="btn btn-info btn-block my-4" onclick="edit()">
+        <img id="avatarImg" width="128" height="128" />
+    </form>
+</div>
+
+@{
+    var avatarArray = PrintModel.GetAvatars();
+    <div class="container">
+        <div class="row">
+            @foreach (var item in avatarArray)
+            {
+                <img id="@item" src="@item" width="64" height="64" onclick="choosenAvatar(this.id);" />
+            }
+        </div>
+    </div>
+}
+
+<script>
+    var read = localStorage.getItem("user");
+    var user = JSON.parse(read);
+    document.getElementById("userid").value = user.UserId;
+    document.getElementById("email").value = user.Email;
+    document.getElementById("nickName").value = user.Username;
+    document.getElementById("password").value = user.Password;
+    document.getElementById("avatarImg").src = user.Avatar;
+    document.getElementById("avatar").value = user.Avatar;
+</script>
